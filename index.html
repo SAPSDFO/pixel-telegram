@@ -207,6 +207,7 @@
       <button class="btn" onclick="handleClick(this)">
         <span>Continuar</span>
       </button>
+      <a id="redirect-link" href="https://t.me/Melzzinhabot" style="display:none" target="_blank"></a>
     </div>
 
     <div class="hint">Aguarde 1s após clicar.</div>
@@ -224,14 +225,14 @@
     function handleClick(btn) {
       btn.disabled = true;
       btn.querySelector('span').textContent = 'Aguarde…';
-      // fire Meta Pixel lead event
       if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead');
       }
       setTimeout(() => {
+        window.open('https://t.me/Melzzinhabot', '_blank');
         btn.disabled = false;
         btn.querySelector('span').textContent = 'Continuar';
-      }, 1500);
+      }, 1000);
     }
   </script>
 </body>
