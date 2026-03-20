@@ -1,116 +1,238 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acesso exclusivo</title>
 
-  <!-- TikTok Pixel Code Start -->
+  <!-- Meta Pixel Code -->
   <script>
-  !function (w, d, t) {
-    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");
-    n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;
-    e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-    // ✅ Pixel novo (desta conta)
-    ttq.load('D6ISFDJC77U4C3682T30');
-    ttq.page();
-  }(window, document, 'ttq');
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1586573372457558');
+  fbq('track', 'PageView');
   </script>
-  <!-- TikTok Pixel Code End -->
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1586573372457558&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet"/>
 
   <style>
-    :root { color-scheme: dark; }
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#0b0b0b;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:#fff;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e4c97e;
+      --dark: #0a0a0a;
+      --dark2: #141414;
+      --text: #f0ece4;
+      --text-muted: #a09880;
     }
-    .card{
-      width:min(560px, 92vw);
-      background:#121212;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
-      padding:28px;
-      box-shadow:0 10px 40px rgba(0,0,0,.6);
-      text-align:center;
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
     }
-    h1{
-      margin:0 0 10px 0;
-      font-size:26px;
-      font-weight:900;
-      letter-spacing:.2px;
+
+    /* Atmospheric background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
     }
-    p{
-      margin:0 0 18px 0;
-      opacity:.85;
-      font-size:14px;
+
+    /* Grain texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
     }
-    button{
-      width:100%;
-      padding:16px 18px;
-      border:0;
-      border-radius:12px;
-      font-size:18px;
-      font-weight:900;
-      cursor:pointer;
-      background:#e50914;
-      color:#fff;
-      transition: transform .05s ease, opacity .2s ease;
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    button:active{ transform: scale(.99); }
-    button[disabled]{ opacity:.6; cursor:not-allowed; }
-    .small{
-      margin-top:12px;
-      font-size:12px;
-      opacity:.6;
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Decorative top line */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 2.4rem;
+      animation: fadeUp 1s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .ornament-line {
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .ornament-line.right {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .ornament-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      animation: fadeUp 1s 0.18s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    h1 span {
+      color: var(--gold-light);
+    }
+
+    p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 1s 0.26s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn-wrap {
+      animation: fadeUp 1s 0.36s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.4s ease;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .btn:hover::before { transform: translateX(0); }
+    .btn:hover { color: var(--dark); }
+
+    .btn span { position: relative; z-index: 1; }
+
+    .hint {
+      margin-top: 1.4rem;
+      font-size: 0.7rem;
+      color: #5a5445;
+      letter-spacing: 0.1em;
+      animation: fadeUp 1s 0.44s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    /* Bottom ornament */
+    .ornament-bottom {
+      margin-top: 3rem;
+      animation: fadeUp 1s 0.5s cubic-bezier(0.22,1,0.36,1) both;
     }
   </style>
 </head>
-
 <body>
-  <div class="card">
-    <h1>Acesso exclusivo</h1>
-    <p>Clique abaixo para continuar.</p>
-    <button id="cta" type="button">Continuar</button>
-    <div class="small">Aguarde 1s após clicar.</div>
+
+  <div class="container">
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line right"></div>
+    </div>
+
+    <h1>Acesso <span>exclusivo</span></h1>
+
+    <p>Clique abaixo para continuar</p>
+
+    <div class="btn-wrap">
+      <button class="btn" onclick="handleClick(this)">
+        <span>Continuar</span>
+      </button>
+    </div>
+
+    <div class="hint">Aguarde 1s após clicar.</div>
+
+    <div class="ornament-bottom">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ✅ Seu link do Telegram
-    const TELEGRAM_URL = "https://t.me/+hhhoa7AnqLBkNDE5";
-
-    const btn = document.getElementById("cta");
-    let clicked = false;
-
-    function track(eventName){
-      try{
-        if (window.ttq && typeof window.ttq.track === "function") {
-          window.ttq.track(eventName);
-        }
-      }catch(e){}
-    }
-
-    btn.addEventListener("click", () => {
-      if (clicked) return;
-      clicked = true;
+    function handleClick(btn) {
       btn.disabled = true;
-      btn.textContent = "Abrindo...";
-
-      // ✅ Evento padrão recomendado
-      track("Lead");
-
-      // Delay curto pra garantir envio do evento antes do redirect
+      btn.querySelector('span').textContent = 'Aguarde…';
+      // fire Meta Pixel lead event
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+      }
       setTimeout(() => {
-        window.location.href = TELEGRAM_URL;
-      }, 900);
-    });
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Continuar';
+      }, 1500);
+    }
   </script>
 </body>
 </html>
