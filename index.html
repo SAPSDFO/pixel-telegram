@@ -5,9 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acesso exclusivo</title>
 
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1586573372457558&ev=PageView&noscript=1"
-  /></noscript>
+  <!-- Meta Pixel -->
+  <script>
+    (function(w,d,s,u){
+      if (w.fbq) return;
+      var n = w.fbq = function(){
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!w._fbq) w._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      var t = d.createElement(s);
+      t.async = true;
+      t.src = u;
+      var f = d.getElementsByTagName(s)[0];
+      f.parentNode.insertBefore(t, f);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    var PIXEL_ID = '1586573372457558';
+
+    fbq('init', PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet"/>
 
@@ -65,9 +86,23 @@
       gap: 14px;
       margin-bottom: 2.4rem;
     }
-    .ornament-line { height: 1px; width: 60px; background: linear-gradient(90deg, transparent, var(--gold)); }
-    .ornament-line.right { background: linear-gradient(90deg, var(--gold), transparent); }
-    .ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+
+    .ornament-line {
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .ornament-line.right {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .ornament-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
 
     h1 {
       font-family: 'Cormorant Garamond', serif;
@@ -77,6 +112,7 @@
       line-height: 1.15;
       margin-bottom: 1.4rem;
     }
+
     h1 span { color: var(--gold-light); }
 
     p {
@@ -105,6 +141,7 @@
       overflow: hidden;
       transition: color 0.4s ease;
     }
+
     .btn::before {
       content: '';
       position: absolute;
@@ -113,6 +150,7 @@
       transform: translateX(-101%);
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .btn:hover::before { transform: translateX(0); }
     .btn:hover { color: var(--dark); }
     .btn span { position: relative; z-index: 1; }
@@ -124,10 +162,20 @@
       color: #5a5445;
       letter-spacing: 0.1em;
     }
+
     .ornament-bottom { margin-top: 3rem; }
   </style>
 </head>
 <body>
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1586573372457558&ev=PageView&noscript=1"
+      alt=""
+    />
+  </noscript>
 
   <div class="container">
     <div class="ornament">
@@ -139,7 +187,12 @@
     <h1>Acesso <span>exclusivo</span></h1>
     <p>Clique abaixo para continuar</p>
 
-    <a class="btn" id="cta-btn" href="https://t.me/Melzzinhabot">
+    <a
+      class="btn"
+      id="cta-btn"
+      href="https://t.me/Melzzinhabot?start=ads_tiktok"
+      rel="noopener"
+    >
       <span id="btn-text">Continuar</span>
     </a>
 
@@ -154,38 +207,33 @@
     </div>
   </div>
 
-  <!-- Meta Pixel no final do body garante que dispara depois do DOM pronto -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1586573372457558');
-
-    // PageView disparado após o fbevents.js carregar
-    fbq('track', 'PageView');
-
-    // Botão: dispara Lead e redireciona
-    document.getElementById('cta-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      var btn = this;
+    (function () {
+      var btn = document.getElementById('cta-btn');
       var btnText = document.getElementById('btn-text');
+      var destination = btn.getAttribute('href');
 
-      fbq('track', 'Lead');
+      function go() {
+        window.location.href = destination;
+      }
 
-      btnText.textContent = 'Aguarde…';
-      btn.classList.add('loading');
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
 
-      setTimeout(function() {
-        window.location.href = 'https://t.me/Melzzinhabot';
-      }, 1000);
-    });
+        btn.classList.add('loading');
+        btnText.textContent = 'Aguarde…';
+
+        try {
+          fbq('track', 'Lead', {}, {
+            eventID: 'lead_' + Date.now()
+          });
+        } catch (err) {
+          console.warn('Erro ao disparar Lead:', err);
+        }
+
+        setTimeout(go, 1200);
+      });
+    })();
   </script>
-
 </body>
 </html>
